@@ -1,6 +1,7 @@
 (defpackage nonempty
   (:use :cl)
-  (:shadow #:cons))
+  (:shadow #:cons #:length
+           #:reverse))
 
 (in-package :nonempty)
 
@@ -25,3 +26,4 @@
 
 #+nil
 (cons 0 (nel 1 2 3))
+

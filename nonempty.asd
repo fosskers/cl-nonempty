@@ -5,7 +5,8 @@
   :depends-on ()
   :components ((:module "src"
                 :components
-                ((:file "nonempty"))))
+                ((:file "nonempty")
+                 (:file "generics"))))
   :description ""
   :in-order-to ((test-op (test-op "nonempty/tests"))))
 
