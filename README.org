@@ -1,5 +1,22 @@
-* Nonempty 
+#+title: nonempty
 
-** Usage
+Non-empty collections for Common Lisp.
 
-** Installation
+Non-emptiness can be a powerful guarantee. There are often times when a
+collection is passed to a function, but must contain some value to be useful. In
+these cases we must manually check, or otherwise account for NIL in our logic.
+This can muddle the clarity of the code, especially when empty is not a valid
+state. It is here that non-empty variants of the usual collection types can be
+used to great effect.
+
+See ~nel~, the main way to construct a non-empty list.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+
+;; Always succeeds! Never nil!
+(car (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: 1
