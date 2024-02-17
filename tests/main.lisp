@@ -1,11 +1,11 @@
-(defpackage nonempty/tests/main
-  (:use :cl
-        :nonempty
-        :rove))
-(in-package :nonempty/tests/main)
+(defpackage nonempty/tests
+  (:use :cl :parachute)
+  (:local-nicknames (:ne :nonempty)))
 
-;; NOTE: To run this test file, execute `(asdf:test-system :nonempty)' in your Lisp.
+(in-package :nonempty/tests)
 
-(deftest test-target-1
-  (testing "should (= 1 1) to be true"
-    (ok (= 1 1))))
+(define-test suite)
+
+(define-test "Lists"
+  :parent suite
+  (is equal 1 (ne:car (ne:nel 1 2 3))))

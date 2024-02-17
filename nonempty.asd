@@ -1,5 +1,5 @@
 (defsystem "nonempty"
-  :version "0.0.1"
+  :version "0.1.0"
   :author "Colin Woodbury <colin@fosskers.ca>"
   :license "LGPL-3.0-only"
   :depends-on ()
@@ -8,16 +8,15 @@
                 ((:file "package")
                  (:file "list")
                  (:file "generics"))))
-  :description ""
+  :description "Non-empty collections."
   :in-order-to ((test-op (test-op "nonempty/tests"))))
 
 (defsystem "nonempty/tests"
-  :author ""
-  :license ""
-  :depends-on ("nonempty"
-               "rove")
+  :author "Colin Woodbury <colin@fosskers.ca>"
+  :license "LGPL-3.0-only"
+  :depends-on (:nonempty :parachute)
   :components ((:module "tests"
                 :components
                 ((:file "main"))))
   :description "Test system for nonempty"
-  :perform (test-op (op c) (symbol-call :rove :run c)))
+  :perform (test-op (op c) (symbol-call :parachute :test :nonempty/tests)))
