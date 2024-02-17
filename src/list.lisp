@@ -1,8 +1,3 @@
-(defpackage nonempty
-  (:use :cl)
-  (:shadow #:cons #:length
-           #:reverse))
-
 (in-package :nonempty)
 
 (defstruct nelist
@@ -27,3 +22,20 @@
 #+nil
 (cons 0 (nel 1 2 3))
 
+(declaim (ftype (function (nelist) t) car))
+(defun car (items)
+  "The first element of a non-empty list."
+  (nelist-head items))
+
+#+nil
+(car (nel 1 2 3))
+
+(declaim (ftype (function (nelist) list) cdr))
+(defun cdr (items)
+  "The possibly-empty tail of a non-empty list."
+  (nelist-tail items))
+
+#+nil
+(cdr (nel 1 2 3))
+#+nil
+(cdr (nel 1))
