@@ -1,7 +1,7 @@
 (defpackage nonempty
   (:use :cl)
   (:shadow #:cons #:car #:cdr #:last
-           #:map
+           #:map #:append
            #:length #:reverse #:elt)
   ;; --- Lists --- ;;
   (:export #:nelist #:nel

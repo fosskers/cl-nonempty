@@ -56,3 +56,21 @@
 
 #+nil
 (last (nel 1 2 3))
+
+(defgeneric append (nonempty other)
+  (:documentation "Append some OTHER collection to a NONEMPTY one."))
+
+(defmethod append ((nonempty nelist) (other nelist))
+  (make-nelist :head (nelist-head nonempty)
+               :tail (cl:append (nelist-tail nonempty)
+                                (to-list other))))
+
+(defmethod append ((nonempty nelist) (other list))
+  (make-nelist :head (nelist-head nonempty)
+               :tail (cl:append (nelist-tail nonempty)
+                                other)))
+
+#+nil
+(append (nel 1 2 3) (nel 4 5 6))
+#+nil
+(append (nel 1 2 3) '(4 5 6))
