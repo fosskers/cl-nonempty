@@ -45,3 +45,14 @@
 
 #+nil
 (to-list (nel 1 2 3))
+
+(defgeneric last (items)
+  (:documentation "The last element of the ITEMS. Guaranteed to exist."))
+
+(defmethod last ((items nelist))
+  (if (null (nelist-tail items))
+      (nelist-head items)
+      (cl:car (cl:last (nelist-tail items)))))
+
+#+nil
+(last (nel 1 2 3))

@@ -69,3 +69,4 @@ item in the list."
 (fold #'+ (nel 1 2 3))
 #+nil
 (fold #'+ (nel 1 2 3) :seed 10)
+
