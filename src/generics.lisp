@@ -35,3 +35,13 @@
 (elt (nel 1 2 3) 2)
 #+nil
 (elt (nel 1 2 3) 20)
+
+(defgeneric to-list (items)
+  (:documentation "Convert this non-empty collection into a normal list."))
+
+(defmethod to-list ((items nelist))
+  (cl:cons (nelist-head items)
+           (nelist-tail items)))
+
+#+nil
+(to-list (nel 1 2 3))
