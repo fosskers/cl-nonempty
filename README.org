@@ -9,8 +9,6 @@ This can muddle the clarity of the code, especially when empty is not a valid
 state. It is here that non-empty variants of the usual collection types can be
 used to great effect.
 
-See ~nel~, the main way to construct a non-empty list.
-
 #+begin_src lisp :exports both
 (in-package :nonempty)
 
