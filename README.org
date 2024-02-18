@@ -201,6 +201,40 @@ Convert this non-empty collection into a normal list.
 
 #+RESULTS:
 : (1 2 3)
+** Transducers Support
+
+Support for [[https://codeberg.org/fosskers/cl-transducers][Transducers]] is provided by the ~nonempty/transducers~ system. As this
+incurs additions dependencies, it is entirely optional. The examples below use
+full symbol paths, but it's assumed that you'll set appropriate nicknames:
+
+#+begin_src lisp
+(defpackage foo
+  (:use :cl)
+  (:local-nicknames (:ne :nonempty)
+                    (:nt :nonempty/transducers)
+                    (:t  :transducers)))
+#+end_src
+
+Non-empty lists can be used as "sources" as-is:
+
+#+begin_src lisp :exports both :results verbatim
+(in-package :transducers)
+(transduce (map #'1+) #'cons (nonempty:nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: (2 3 4)
+
+And you can also reduce back into a non-empty list, provided that something
+actually made it through the transduction:
+
+#+begin_src lisp :exports both :results verbatim
+(in-package :transducers)
+(transduce (map #'1+) #'nonempty/transducers:nelist (nonempty:nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: #S(NONEMPTY:NELIST :HEAD 2 :TAIL (3 4))
 
 * Further Work
 
