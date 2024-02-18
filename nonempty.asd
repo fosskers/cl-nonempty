@@ -20,3 +20,12 @@
                 ((:file "main"))))
   :description "Test system for nonempty"
   :perform (test-op (op c) (symbol-call :parachute :test :nonempty/tests)))
+
+(defsystem "nonempty/transducers"
+  :author "Colin Woodbury <colin@fosskers.ca>"
+  :license "LGPL-3.0-only"
+  :depends-on (:nonempty :transducers)
+  :components ((:module "src"
+                :components
+                ((:file "transducers"))))
+  :description "Transducers support for nonempty.")
