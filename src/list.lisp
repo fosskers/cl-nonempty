@@ -35,8 +35,6 @@
 
 #+nil
 (cdr (nel 1 2 3))
-#+nil
-(cdr (nel 1))
 
 (declaim (ftype (function ((function (t) *) nelist) nelist) map))
 (defun map (fn items)

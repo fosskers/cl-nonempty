@@ -1,5 +1,7 @@
 #+title: nonempty
 
+(This README is best viewed on [[https://codeberg.org/fosskers/nonempty][Codeberg]].)
+
 Non-empty collections for Common Lisp.
 
 Non-emptiness can be a powerful guarantee. There are often times when a
@@ -12,9 +14,188 @@ used to great effect.
 #+begin_src lisp :exports both
 (in-package :nonempty)
 
-;; Always succeeds! Never nil!
+;; Always succeeds, never nil.
 (car (nel 1 2 3))
 #+end_src
 
 #+RESULTS:
 : 1
+
+* API
+
+The examples here use ~(in-package :nonempty)~ for brevity, but it is assumed that
+you will set a nickname in your own code, for instance ~:ne~.
+
+** Non-empty Lists
+
+Functions specific to non-empty lists.
+
+*** nel, cons
+
+Construct a non-empty list from at least one input argument.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(nel 1 2 3)
+#+end_src
+
+#+RESULTS:
+: #S(NELIST :HEAD 1 :TAIL (2 3))
+
+
+Append a new item onto the front of a non-empty list.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(cons 0 (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: #S(NELIST :HEAD 0 :TAIL (1 2 3))
+
+*** car, cdr
+
+The first element of a non-empty list. Always succeeds.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(car (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: 1
+
+The possibly-empty tail of a non-empty list.
+
+#+begin_src lisp :exports both :results verbatim
+(in-package :nonempty)
+(cdr (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: (2 3)
+
+*** map, filter, fold
+
+Map some FN over the given ITEMS, yielding a new non-empty list.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(map #'1+ (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: #S(NELIST :HEAD 2 :TAIL (3 4))
+
+Keep ITEMS for which a PRED function succeeds. Not guaranteed to be non-empty.
+
+#+begin_src lisp :exports both :results verbatim
+(in-package :nonempty)
+(filter #'evenp (nel 1 2 3 4 5 6))
+#+end_src
+
+#+RESULTS:
+: (2 4 6)
+
+Reduce some ITEMS via a 2-arity FN.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(fold #'+ (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: 6
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(fold #'+ (nel 1 2 3) :seed 10)
+#+end_src
+
+#+RESULTS:
+: 16
+
+** Generics
+
+*** length
+
+The length of the given non-empty structure.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(length (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: 3
+
+*** reverse
+
+The reverse of the given non-empty structure.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(reverse (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: #S(NELIST :HEAD 3 :TAIL (2 1))
+
+*** elt, last
+
+The element of ITEMS specified by INDEX.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(elt (nel 1 2 3) 2)
+#+end_src
+
+#+RESULTS:
+: 3
+
+The last element of the ITEMS. Guaranteed to exist.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(last (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: 3
+
+*** append
+
+Append some OTHER collection to a NONEMPTY one.
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(append (nel 1 2 3) (nel 4 5 6))
+#+end_src
+
+#+RESULTS:
+: #S(NELIST :HEAD 1 :TAIL (2 3 4 5 6))
+
+#+begin_src lisp :exports both
+(in-package :nonempty)
+(append (nel 1 2 3) '(4 5 6))
+#+end_src
+
+#+RESULTS:
+: #S(NELIST :HEAD 1 :TAIL (2 3 4 5 6))
+
+
+*** to-list
+
+Convert this non-empty collection into a normal list.
+
+#+begin_src lisp :exports both :results verbatim
+(in-package :nonempty)
+(to-list (nel 1 2 3))
+#+end_src
+
+#+RESULTS:
+: (1 2 3)
+
+* See Also
+
+- [[https://lib.rs/crates/nonempty-collections][Rust: nonempty-collections]]
