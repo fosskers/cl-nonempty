@@ -7,9 +7,9 @@ Non-empty collections for Common Lisp.
 Non-emptiness can be a powerful guarantee. There are often times when a
 collection is passed to a function, but must contain some value to be useful. In
 these cases we must manually check, or otherwise account for NIL in our logic.
-This can muddle the clarity of the code, especially when empty is not a valid
-state. It is here that non-empty variants of the usual collection types can be
-used to great effect.
+This can muddle the clarity of the code, especially when emptiness is not a
+valid state. It is here that non-empty variants of the usual collection types
+can be used to great effect.
 
 #+begin_src lisp :exports both
 (in-package :nonempty)
@@ -24,7 +24,13 @@ used to great effect.
 * API
 
 The examples here use ~(in-package :nonempty)~ for brevity, but it is assumed that
-you will set a nickname in your own code, for instance ~:ne~.
+you will set a nickname in your own code:
+
+#+begin_src lisp
+(defpackage foo
+  (:use :cl)
+  (:local-nicknames (:ne :nonempty)))
+#+end_src
 
 ** Non-empty Lists
 
@@ -196,6 +202,13 @@ Convert this non-empty collection into a normal list.
 #+RESULTS:
 : (1 2 3)
 
+* Further Work
+
+- Non-empty Vectors
+- Non-empty Hash Tables
+
 * See Also
 
 - [[https://lib.rs/crates/nonempty-collections][Rust: nonempty-collections]]
+- [[https://codeberg.org/fosskers/nonempty][Codeberg Mirror]]
+- [[https://github.com/fosskers/cl-nonempty][Github Mirror]]
