@@ -19,8 +19,6 @@
 
 #+nil
 (reverse (nel 1 2 3))
-#+nil
-(reverse (nel 1))
 
 (defgeneric elt (items index)
   (:documentation "The element of ITEMS specified by INDEX."))
@@ -33,8 +31,6 @@
 
 #+nil
 (elt (nel 1 2 3) 2)
-#+nil
-(elt (nel 1 2 3) 20)
 
 (defgeneric to-list (items)
   (:documentation "Convert this non-empty collection into a normal list."))

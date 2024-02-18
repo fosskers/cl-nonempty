@@ -8,7 +8,7 @@
            #:cons #:car #:cdr
            #:map #:filter #:fold)
   ;; --- Generics --- ;;
-  (:export #:length #:reverse #:elt #:last
+  (:export #:length #:reverse #:elt #:last #:append
            #:to-list)
   (:documentation "Non-empty collections.
 
