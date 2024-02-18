@@ -2,6 +2,7 @@
   (:use :cl)
   (:local-nicknames (:ne :nonempty)
                     (:t :transducers))
+  (:export #:nelist)
   (:documentation "Transducers support for nonempty."))
 
 (in-package :nonempty/transducers)
@@ -19,12 +20,14 @@
 
 - `transducers:empty-transduction': when no values made it through the transduction."
   (cond ((and a-p i-p) (cons input acc))
-        ((and a-p (not i-p) acc) (ne::make-nelist :head (car acc)
-                                                  :tail (cdr acc)))
+        ;; The transduction is complete and items were actually saved.
+        ((and a-p (not i-p) acc)
+         (let ((r (nreverse acc)))
+           (ne::make-nelist :head (car r)
+                            :tail (cdr r))))
+        ;; The transduction is complete but nothing made it through.
         ((and a-p (not i-p)) (error 't:empty-transduction :msg "nelist: the transduction was empty."))
         (t '())))
 
 #+nil
 (t:transduce (t:filter #'evenp) #'nelist (ne:nel 1 2 3 5))
-#+nil
-(t:transduce (t:filter #'evenp) #'nelist (ne:nel 1 3 5))
