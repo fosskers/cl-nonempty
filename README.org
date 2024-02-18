@@ -203,9 +203,10 @@ Convert this non-empty collection into a normal list.
 : (1 2 3)
 ** Transducers Support
 
-Support for [[https://codeberg.org/fosskers/cl-transducers][Transducers]] is provided by the ~nonempty/transducers~ system. As this
-incurs additions dependencies, it is entirely optional. The examples below use
-full symbol paths, but it's assumed that you'll set appropriate nicknames:
+For additional high-level collection operations, support for [[https://codeberg.org/fosskers/cl-transducers][Transducers]] is
+provided by the ~nonempty/transducers~ system. As this incurs additions
+dependencies, it is entirely optional. The examples below use full symbol paths,
+but it's assumed that you'll set appropriate nicknames:
 
 #+begin_src lisp
 (defpackage foo
@@ -244,5 +245,6 @@ actually made it through the transduction:
 * See Also
 
 - [[https://lib.rs/crates/nonempty-collections][Rust: nonempty-collections]]
+- [[https://codeberg.org/fosskers/cl-transducers][Transducers]]
 - [[https://codeberg.org/fosskers/nonempty][Codeberg Mirror]]
 - [[https://github.com/fosskers/cl-nonempty][Github Mirror]]
